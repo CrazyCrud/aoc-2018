@@ -48,10 +48,25 @@ def part_1(claims):
     print("{} files are claimed by two or more ids".format(number_of_claimed_fields))
 
     return fabric
-    
+
 
 def part_2(fabric):
-    pass
+
+    unique_ids = set()
+
+    for x in range(0, len(fabric)):
+        for y in range(0, len(fabric[0])):
+            fabric_field = fabric[x][y]
+
+            if len(fabric_field) == 1:
+                unique_ids.add(fabric_field[0])
+            elif len(fabric_field) > 1:
+                for claim_id in fabric_field:
+                    unique_ids.discard(claim_id)
+            # print(unique_ids)
+
+    print("Unique ids are {}".format(unique_ids))
+    print(len(unique_ids))
 
 
 if __name__ == "__main__":
