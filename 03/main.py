@@ -24,9 +24,7 @@ def read_input(input_data):
 
 
 def part_1(claims):
-    fabric = np.array([[[[]] for j in range(1000)] for i in range(1000)])
-
-    print(fabric.shape)
+    fabric = [[[] for j in range(1000)] for i in range(1000)]
 
     for claim in claims:
         x_offset = claim['x_offset']
@@ -35,21 +33,25 @@ def part_1(claims):
         width = claim['width']
         height = claim['height']
 
-        # print(id, x_offset, y_offset, width, height)
-
         for x in range(x_offset, x_offset + width):
             for y in range(y_offset, y_offset + height):
                 fabric_field = fabric[x][y]
-                fabric_field = np.append(fabric_field, id)
+                fabric_field.append(id)
                 fabric[x][y] = fabric_field
 
     number_of_claimed_fields = 0
-    for x in range(fabric.shape[0]):
-        for y in range(fabric.shape[1]):
-            if fabric[x, y].size > 1:
-                number_of_claimed_fields += number_of_claimed_fields
+    for x in range(0, len(fabric)):
+        for y in range(0, len(fabric[0])):
+            if len(fabric[x][y]) > 1:
+                number_of_claimed_fields += 1
 
     print("{} files are claimed by two or more ids".format(number_of_claimed_fields))
+
+    return fabric
+    
+
+def part_2(fabric):
+    pass
 
 
 if __name__ == "__main__":
@@ -61,4 +63,6 @@ if __name__ == "__main__":
 
     claims = read_input(lines)
 
-    part_1(claims)
+    fabric = part_1(claims)
+
+    part_2(fabric)
