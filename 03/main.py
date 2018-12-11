@@ -1,5 +1,4 @@
 import re
-import numpy as np
 
 
 def read_input(input_data):
@@ -51,19 +50,25 @@ def part_1(claims):
 
 
 def part_2(fabric):
-
     unique_ids = set()
 
-    for x in range(0, len(fabric)):
-        for y in range(0, len(fabric[0])):
+    x_length = len(fabric)
+    y_length = len(fabric[0])
+
+    for x in range(0, x_length):
+        for y in range(0, y_length):
             fabric_field = fabric[x][y]
 
             if len(fabric_field) == 1:
                 unique_ids.add(fabric_field[0])
-            elif len(fabric_field) > 1:
+
+    for x in range(0, x_length):
+        for y in range(0, y_length):
+            fabric_field = fabric[x][y]
+
+            if len(fabric_field) > 1:
                 for claim_id in fabric_field:
                     unique_ids.discard(claim_id)
-            # print(unique_ids)
 
     print("Unique ids are {}".format(unique_ids))
     print(len(unique_ids))
